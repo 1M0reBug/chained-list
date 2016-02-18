@@ -9,7 +9,7 @@ void afficher(liste* l) {
 
   while(tmp != NULL)
   {
-      printf("%d ", tmp->valeur);
+      printf("%d \n", tmp->valeur);
       tmp = tmp->suivant;
   }
 }
@@ -67,9 +67,9 @@ liste* remplir(liste* l, int tab[], unsigned int nb) {
     unsigned int i = 0;
     liste* l_copy = l;
     for(i = 0; i < nb; i++) {
-        l->valeur = tab[i];
-        l = l->suivant;
+      l = ajoute_fin(l,tab[i]);
     }
+    printf("%d", l_copy->valeur);
     return l_copy;
 
 }
