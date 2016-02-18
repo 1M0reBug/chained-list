@@ -1,7 +1,7 @@
 /**
   * Quagliatini Jordan + ROGAI Rayan
-  * Description:
-  *   Le TP sur les listes chainées
+  * Description: Le TP sur les listes chainées
+  *   Attention penser à bien vider la liste apres utilisation grace à la fonction vider(**liste)
 */
 
 #include <stdio.h>

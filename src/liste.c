@@ -100,7 +100,7 @@ liste* ajoute_position(liste* l, int entier, unsigned int position) {
 
 /**
   * remplit la liste avec les éléments d'un tableau
-  * de taille nn
+  * de taille nb
   * @param l: liste* la liste à modifier
   * @param tab: int[] un tableau d'entiers
   * @param nb: unsigned int la taille du tableau tab
