@@ -4,6 +4,19 @@
 #include <stdlib.h>
 
 
+/**
+  * @author Jordan QUAGLIATINI, Rayan ROGAÏ
+  * @date 18/02/2016
+  * Ce fichier regroupe l'ensemble des fonctions de manipulation
+  * d'une liste chainée.
+  */
+
+
+/**
+  * Cette méthode affiche une liste
+  * en la parcourant élément par élément
+  * @param l : liste* la liste à afficher
+  */
 void afficher(liste* l) {
   liste *tmp = l;
 
@@ -14,6 +27,14 @@ void afficher(liste* l) {
   }
 }
 
+/**
+  * ajoute un élément à la fin de la liste
+  * passée en paramètrue
+  * @param l: liste* la liste à laquelle il faut
+  *           ajouter un élément à la fin
+  * @param entier: int un entier à ajouter à la fin de la liste
+  * @return liste* la liste modifiée
+  */
 liste* ajoute_fin(liste* l, int entier) {
   liste *nouvelElement = malloc(sizeof(liste));
   nouvelElement->valeur = entier;
@@ -33,6 +54,13 @@ liste* ajoute_fin(liste* l, int entier) {
   return l;
 }
 
+/**
+  * ajoute un élément à la place de la tête de
+  * la liste
+  * @param l: liste* la liste à modifier
+  * @param entier: int l'entier à ajouter au début de la liste
+  * @return liste* la liste modifiée
+  */
 liste* ajoute_debut(liste* l, int entier) {
 
     liste* _l = malloc(sizeof(liste));
@@ -45,6 +73,14 @@ liste* ajoute_debut(liste* l, int entier) {
     return l;
 }
 
+/**
+  * ajoute un élément à une position donnée dans la liste
+  * @param l: liste* la liste à modifier
+  * @param entier: int l'entier à ajouter dans la liste
+  * @param position: unsigned int la position à laquelle il faut
+  *                  ajouter entier
+  * @return liste* la liste modifiée
+  */
 liste* ajoute_position(liste* l, int entier, unsigned int position) {
 
     unsigned int i = 1;
@@ -62,6 +98,14 @@ liste* ajoute_position(liste* l, int entier, unsigned int position) {
     return l;
 }
 
+/**
+  * remplit la liste avec les éléments d'un tableau
+  * de taille nn
+  * @param l: liste* la liste à modifier
+  * @param tab: int[] un tableau d'entiers
+  * @param nb: unsigned int la taille du tableau tab
+  * @return liste* la liste remplie
+  */
 liste* remplir(liste* l, int tab[], unsigned int nb) {
 
     unsigned int i = 0;
@@ -74,6 +118,13 @@ liste* remplir(liste* l, int tab[], unsigned int nb) {
 
 }
 
+/**
+  * recherche un entier dans la liste donnée en paramètre et
+  * renvoie sa position dans la liste.
+  * @param l: liste* la liste à modifier
+  * @param entier: un entier à chercher dans la liste
+  * @return int la position de l'entier recherché
+  */
 int rechercher(liste* l, int entier) {
 
     liste* courant = l;
@@ -89,6 +140,12 @@ int rechercher(liste* l, int entier) {
     return -1;
 }
 
+/**
+  * supprime un élément dans la liste passée en paramètre
+  * @param l: liste* la liste à modifier
+  * @param entier: int l'entier à supprimer de la liste
+  * @return liste* la liste modifiée
+  */
 liste* supprimer(liste* l, int entier) {
     liste* courant;
     liste* precedent;
@@ -104,9 +161,14 @@ liste* supprimer(liste* l, int entier) {
 
         courant = courant->suivant;
     }
+
     return l;
 }
 
+/**
+  * vide et libère la mémoire occupée par la liste
+  * @param l: liste** un pointeur sur la tête de la liste
+  */
 void vider(liste** l) {
   liste* tmp = *l;
   liste* tmpnxt = malloc(sizeof(liste));
