@@ -68,7 +68,7 @@ liste* ajoute_debut(liste* l, int entier) {
     _l->suivant = l->suivant;
 
     l->valeur = entier;
-    l->suivant = l;
+    l->suivant = _l;
 
     return l;
 }
@@ -86,13 +86,13 @@ liste* ajoute_position(liste* l, int entier, unsigned int position) {
     unsigned int i = 1;
     liste* courant = l;
 
-    for(i = 1; i < position && courant->suivant != NULL; i++) {
+    for(i = 1; i < position-1 && courant->suivant != NULL; i++) {
         courant = courant->suivant;
     }
 
     liste* fin = malloc(sizeof(liste));
     fin->valeur = entier;
-    fin->suivant = NULL;
+    fin->suivant = courant->suivant;
     courant->suivant = fin;
 
     return l;
@@ -112,8 +112,10 @@ liste* remplir(liste* l, int tab[], unsigned int nb) {
     liste* l_copy = l;
     for(i = 0; i < nb; i++) {
       l = ajoute_fin(l,tab[i]);
+      if(l_copy == NULL) {
+          l_copy = l;
+      }
     }
-    printf("%d", l_copy->valeur);
     return l_copy;
 
 }
@@ -171,13 +173,10 @@ liste* supprimer(liste* l, int entier) {
   */
 void vider(liste** l) {
   liste* tmp = *l;
-  liste* tmpnxt = malloc(sizeof(liste));
 
   while(tmp != NULL)
   {
-    tmpnxt = tmp->suivant;
     free(tmp);
-    tmp = tmpnxt;
+    tmp = tmp->suivant;
   }
-
 }
