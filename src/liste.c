@@ -1,7 +1,9 @@
 #include "types.h"
 #include "liste.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-#define NULL 0
+//#define NULL 0
 
 
 void afficher(liste* l) {
@@ -17,11 +19,11 @@ void afficher(liste* l) {
 }
 
 liste* ajoute_fin(liste* l, int entier) {
-  liste *nouvelElement;
+  liste *nouvelElement = malloc(sizeof(liste));
   nouvelElement->valeur = entier;
   nouvelElement->suivant = NULL;
 
-  if(liste == NULL){
+  if(l == NULL){
     return nouvelElement;
   } else {
     liste* temp = l;
@@ -36,7 +38,7 @@ liste* ajoute_fin(liste* l, int entier) {
 
 liste* ajoute_debut(liste* l, int entier) {
 
-    liste* _l;
+    liste* _l = malloc(sizeof(liste));
     _l->valeur = l->valeur;
     _l->suivant = l->suivant;
 
@@ -55,7 +57,7 @@ liste* ajoute_position(liste* l, int entier, unsigned int position) {
         courant = courant->suivant;
     }
 
-    liste* fin;
+    liste* fin = malloc(sizeof(liste));
     fin->valeur = entier;
     fin->suivant = NULL;
     courant->suivant = fin;
@@ -110,7 +112,6 @@ liste* supprimer(liste* l, int entier) {
 }
 
 void vider(liste** l) {
-
 
 
 }
