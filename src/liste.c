@@ -1,15 +1,13 @@
 #include "types.h"
 #include "liste.h"
-
+#include <stdio.h>
 
 void afficher(liste* l) {
   liste *tmp = l;
-  /* Tant que l'on n'est pas au bout de la liste */
+
   while(tmp != NULL)
   {
-      /* On affiche */
       printf("%d ", tmp->valeur);
-      /* On avance d'une case */
       tmp = tmp->suivant;
   }
 }
@@ -19,7 +17,7 @@ liste* ajoute_fin(liste* l, int entier) {
   nouvelElement->valeur = entier;
   nouvelElement->suivant = NULL;
 
-  if(liste == NULL){
+  if(l == NULL){
     return nouvelElement;
   } else {
     liste* temp = l;
@@ -30,6 +28,7 @@ liste* ajoute_fin(liste* l, int entier) {
     temp->suivant = nouvelElement;
     return l;
   }
+  return l;
 }
 
 liste* ajoute_debut(liste* l, int entier) {
@@ -71,7 +70,7 @@ int rechercher(liste* l, int entier) {
 
 liste* supprimer(liste* l, int entier) {
 
-    return l:
+    return l;
 }
 
 void vider(liste** l) {
