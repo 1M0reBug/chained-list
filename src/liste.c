@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 /**
   * @author Jordan QUAGLIATINI, Rayan ROGAÏ
   * @date 18/02/2016
@@ -10,7 +11,7 @@
   * d'une liste chainée.
   */
 
-  
+
 /**
   * Cette méthode affiche une liste
   * en la parcourant élément par élément
@@ -18,12 +19,10 @@
   */
 void afficher(liste* l) {
   liste *tmp = l;
-  /* Tant que l'on n'est pas au bout de la liste */
+
   while(tmp != NULL)
   {
-      /* On affiche */
       printf("%d ", tmp->valeur);
-      /* On avance d'une case */
       tmp = tmp->suivant;
   }
 }
@@ -52,6 +51,7 @@ liste* ajoute_fin(liste* l, int entier) {
     temp->suivant = nouvelElement;
     return l;
   }
+  return l;
 }
 
 /**
@@ -155,6 +155,7 @@ liste* supprimer(liste* l, int entier) {
             precedent = courant;
             courant = courant->suivant;
             precedent->suivant = courant->suivant;
+            free(courant);
             return l;
         }
 
@@ -169,6 +170,14 @@ liste* supprimer(liste* l, int entier) {
   * @param l: liste** un pointeur sur la tête de la liste
   */
 void vider(liste** l) {
+  liste* tmp = *l;
+  liste* tmpnxt = malloc(sizeof(liste));
 
+  while(tmp != NULL)
+  {
+    tmpnxt = tmp->suivant;
+    free(tmp);
+    tmp = tmpnxt;
+  }
 
 }
