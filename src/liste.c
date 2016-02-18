@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void afficher(liste* l) {
   liste *tmp = l;
 
@@ -97,6 +98,7 @@ liste* supprimer(liste* l, int entier) {
             precedent = courant;
             courant = courant->suivant;
             precedent->suivant = courant->suivant;
+            free(courant);
             return l;
         }
 
@@ -115,4 +117,5 @@ void vider(liste** l) {
     free(tmp);
     tmp = tmpnxt;
   }
+
 }
