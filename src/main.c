@@ -13,47 +13,15 @@
 void test_lists();
 void test_strings();
 void test_fusion();
+void test_eclatement();
 
 int main() {
-  int liste_triee = 0;
 
-  /*Initialisation des liste*/
-  strings* ma_liste_triee = NULL;
-  strings* ma_liste = NULL;
-  strings* liste1 = NULL;
-  strings* liste2 = NULL;
-
-  const char* tab[5];
-  tab[0] = "bbb";
-  tab[1] = "aaa";
-  tab[2] = "eee";
-  tab[3] = "ccc";
-  tab[4] = "ddd";
-
-  ma_liste = str_remplir(ma_liste, tab, 5);
-
-  printf("La liste :\n");
-  str_afficher(ma_liste);
-  printf("---\n\n");
-
-    eclatement(ma_liste, &liste1, &liste2);
-    printf("Liste 1 :\n");
-    str_afficher(liste1);
-    printf("---\n\n");
-
-    printf("Liste 2 :\n");
-    str_afficher(liste2);
-    printf("---\n\n");
-
-
-  ma_liste_triee = str_remplir(ma_liste_triee, tab, 5); //temporaire pour eviter les seg fault (a supprimer apres avoir fait la fusion)
-  printf("Voici votre liste triée :\n");
-  str_afficher(ma_liste_triee);
-  printf("---\n");
 
 
   //test_lists();
   //test_strings();
+  test_eclatement();
   return 0;
 }
 
@@ -166,4 +134,46 @@ void test_fusion() {
     str_vider(&dst);
     str_vider(&s1);
     str_vider(&s2);
+}
+
+void test_eclatement() {
+    int liste_triee = 0;
+
+    /*Initialisation des liste*/
+    strings* ma_liste_triee = NULL;
+    strings* ma_liste = NULL;
+    strings* liste1 = NULL;
+    strings* liste2 = NULL;
+
+    const char* tab[5];
+    tab[0] = "aaa";
+    tab[1] = "ddd";
+    tab[2] = "ccc";
+    tab[3] = "bbb";
+    tab[4] = "eee";
+
+    ma_liste = str_remplir(ma_liste, tab, 5);
+
+    printf("La liste :\n");
+    str_afficher(ma_liste);
+    printf("---\n\n");
+    ma_liste_triee = ma_liste;
+    while(!est_triee(ma_liste_triee)) {
+        eclatement(ma_liste_triee, &liste1, &liste2);
+        // str_afficher(ma_liste_triee);
+        ma_liste_triee = fusion(liste1, liste2);
+        liste1 = liste2 = NULL;
+        str_afficher(ma_liste_triee);
+        printf("---\n");
+        // sleep(1);
+    }
+
+    printf("Voici votre liste triée :\n");
+    str_afficher(ma_liste_triee);
+    printf("---\n");
+
+    str_vider(&ma_liste_triee);
+    str_vider(&ma_liste);
+    str_vider(&liste1);
+    str_vider(&liste2);
 }

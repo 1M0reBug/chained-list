@@ -16,5 +16,6 @@ int str_size(strings* l);
 strings* fusion(strings* l1, strings* l2);
 
 void eclatement(strings* entree, strings** sortie1, strings** sortie2);
+bool est_triee(strings* l);
 
 #endif //STRINGS_H

@@ -206,16 +206,36 @@ strings* fusion(strings* l1, strings* l2) {
     strings* c1 = l1;
     strings* c2 = l2;
     strings* l = NULL;
+    strings* tmp = NULL;
     while(c1 || c2) {
-        if(!c2 || c1 && c2 && str_size(c1) < str_size(c2)) {
+        if(!c2 || (c1 && c2 && strcmp(c1->valeur, c2->valeur) < 0)) {
+            // printf("toto\n");
             l=str_ajoute_fin(l, c1->valeur);
+            tmp = c1;
             c1 = c1->suivant;
         } else {
+            // printf("tata\n");
             l=str_ajoute_fin(l, c2->valeur);
+            tmp = c2;
             c2 = c2->suivant;
         }
+        tmp->suivant = NULL;
+        tmp->valeur = NULL;
+        free(tmp);
+        tmp = NULL;
     }
     return l;
+}
+
+bool est_triee(strings* l) {
+    strings* courant = l;
+    while (courant->suivant){
+        if( strcmp((courant->suivant)->valeur, courant->valeur) < 0 ) {
+            return false;
+        }
+        courant = courant->suivant;
+    }
+    return true;
 }
 
 void eclatement(strings* ma_liste, strings** liste1, strings** liste2) {
