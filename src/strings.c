@@ -34,9 +34,9 @@ void str_afficher(strings* l) {
   * @param entier: int un entier à ajouter à la fin de la strings
   * @return strings* la strings modifiée
   */
-strings* str_ajoute_fin(strings* l, char* chaine) {
+strings* str_ajoute_fin(strings* l, const char* chaine) {
   strings *nouvelElement = malloc(sizeof(strings));
-  strcpy(nouvelElement->valeur, chaine);
+  nouvelElement->valeur = chaine;
   nouvelElement->suivant = NULL;
 
   if(l == NULL){
@@ -60,13 +60,14 @@ strings* str_ajoute_fin(strings* l, char* chaine) {
   * @param entier: int l'entier à ajouter au début de la strings
   * @return strings* la strings modifiée
   */
-strings* str_ajoute_debut(strings* l, char* chaine) {
+strings* str_ajoute_debut(strings* l, const char* chaine) {
 
     strings* _l = malloc(sizeof(strings));
-    strcpy(_l->valeur, l->valeur);
+    _l->valeur = "";
+    _l->valeur = l->valeur;
     _l->suivant = l->suivant;
 
-    strcpy(l->valeur, chaine);
+    l->valeur = chaine;
     l->suivant = _l;
 
     return l;
@@ -90,7 +91,7 @@ strings* str_ajoute_position(strings* l, char* chaine, unsigned int position) {
     }
 
     strings* fin = malloc(sizeof(strings));
-    strcpy(fin->valeur, chaine);
+    fin->valeur = chaine;
     fin->suivant = courant->suivant;
     courant->suivant = fin;
 
@@ -105,7 +106,7 @@ strings* str_ajoute_position(strings* l, char* chaine, unsigned int position) {
   * @param nb: unsigned int la taille du tableau tab
   * @return strings* la strings remplie
   */
-strings* str_remplir(strings* l, char* tab[], unsigned int nb) {
+strings* str_remplir(strings* l, const char* tab[], unsigned int nb) {
 
     unsigned int i = 0;
     strings* l_copy = l;
@@ -131,7 +132,7 @@ int str_rechercher(strings* l, char* chaine) {
     strings* courant = l;
     int j = 1;
     while(courant) {
-        if(strcmp(courant->valeur, chaine)) {
+        if(strcmp(courant->valeur, chaine) == 0) {
             return j;
         }
         courant = courant->suivant;
@@ -152,12 +153,13 @@ strings* str_supprimer(strings* l, char* chaine) {
     strings* precedent;
     courant = l;
     while(courant->suivant) {
-        if(strcmp(courant->valeur, chaine)) {
+        if(strcmp(courant->valeur, chaine) == 0) {
             l = courant->suivant;
             free(courant);
+            courant = NULL;
             return l;
 
-        } else if(strcmp((courant->suivant)->valeur, chaine) ) {
+        } else if(strcmp((courant->suivant)->valeur, chaine) == 0) {
             precedent = courant;
             courant = courant->suivant;
             precedent->suivant = courant->suivant;
