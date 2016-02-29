@@ -14,28 +14,28 @@ void test_lists();
 void test_strings();
 
 int main() {
-  test_lists();
+  // test_lists();
   test_strings();
   return 0;
 }
 
 void test_strings() {
     strings* ma_liste = NULL;
-    char* tab[5];
-    strcpy(tab[0],"aaa");
-    strcpy(tab[1],"bbb");
-    strcpy(tab[2],"ccc");
-    strcpy(tab[3],"ddd");
-    strcpy(tab[4],"eee");
-    strcpy(tab[5],"fff");
+    const char* tab[5];
+    tab[0] = "aaa";
+    tab[1] = "bbb";
+    tab[2] = "ccc";
+    tab[3] = "ddd";
+    tab[4] = "eee";
+    tab[5] = "fff";
 
     printf("Remplir la liste :\n");
     ma_liste = str_remplir(ma_liste, tab, 5);
     str_afficher(ma_liste);
     printf("---\n");
 
-    printf("\nSupprimer le 4 :\n");
-    str_supprimer(ma_liste, "aaa");
+    printf("\nSupprimer le ccc :\n");
+    ma_liste = str_supprimer(ma_liste, "ccc");
     str_afficher(ma_liste);
     printf("---\n");
 
@@ -44,20 +44,20 @@ void test_strings() {
     str_afficher(ma_liste);
     printf("---\n");
 
-    printf("\nAjoute position 4, 4:\n");
+    printf("\nAjoute position 4, 'zzz':\n");
     str_ajoute_position(ma_liste, "zzz", 4);
     str_afficher(ma_liste);
     printf("---\n");
 
 
-    printf("\nAjoute Debut 0:\n");
-    str_ajoute_debut(ma_liste, 0);
+    printf("\nAjoute Debut 'www':\n");
+    str_ajoute_debut(ma_liste, "www");
     str_afficher(ma_liste);
     printf("---\n");
 
 
     printf("\nRecherche de la valeur 10:\n");
-    printf("la valeur 'ccc' a ete trouvee a la position : %d\n", str_rechercher(ma_liste, "ccc"));
+    printf("la valeur 'bbb' a ete trouvee a la position : %d\n", str_rechercher(ma_liste, "bbb"));
     printf("---\n");
 
     printf("\nVidange de la liste:\n");
