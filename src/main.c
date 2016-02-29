@@ -16,14 +16,12 @@ void test_fusion();
 
 int main() {
   int liste_triee = 0;
-  int choix_liste = 0;  // Liste L1 = 0 et L2 = 1
-  char*  courant = "";
 
   /*Initialisation des liste*/
+  strings* ma_liste_triee = NULL;
   strings* ma_liste = NULL;
   strings* liste1 = NULL;
   strings* liste2 = NULL;
-  strings* ma_liste_triee = NULL;
 
   const char* tab[5];
   tab[0] = "bbb";
@@ -38,36 +36,7 @@ int main() {
   str_afficher(ma_liste);
   printf("---\n\n");
 
-    while(ma_liste)
-    {
-      if(strcmp(ma_liste->valeur, courant) < 0)
-      {
-        /*switch de liste */
-        if(choix_liste == 0)
-          choix_liste = 1;
-        else if (choix_liste == 1)
-          choix_liste = 0;
-        else
-          printf("Erreur de choix de liste (2)\n");
-      }
-      switch (choix_liste)
-      {
-        case 0:
-          liste1 = str_ajoute_fin(liste1, ma_liste->valeur);
-          courant = ma_liste->valeur;
-          break;
-
-        case 1:
-          liste2 = str_ajoute_fin(liste2, ma_liste->valeur);
-          courant = ma_liste->valeur;
-          break;
-
-        default :
-          printf("Erreur de choix de liste\n");
-      }
-
-      ma_liste = ma_liste->suivant;
-    }
+    eclatement(ma_liste, &liste1, &liste2);
     printf("Liste 1 :\n");
     str_afficher(liste1);
     printf("---\n\n");

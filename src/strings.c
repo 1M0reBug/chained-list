@@ -217,3 +217,39 @@ strings* fusion(strings* l1, strings* l2) {
     }
     return l;
 }
+
+void eclatement(strings* ma_liste, strings** liste1, strings** liste2) {
+  int choix_liste = 0;
+  char* courant = "";
+  while(ma_liste)
+  {
+    if(strcmp(ma_liste->valeur, courant) < 0)
+    {
+      /*switch de liste */
+      if(choix_liste == 0)
+        choix_liste = 1;
+      else if (choix_liste == 1)
+        choix_liste = 0;
+      else
+        printf("Erreur de choix de liste (2)\n");
+    }
+    switch (choix_liste)
+    {
+      case 0:
+        *liste1 = str_ajoute_fin(*liste1, ma_liste->valeur);
+        courant = ma_liste->valeur;
+        break;
+
+      case 1:
+        *liste2 = str_ajoute_fin(*liste2, ma_liste->valeur);
+        courant = ma_liste->valeur;
+        break;
+
+      default :
+        printf("Erreur de choix de liste\n");
+    }
+
+    ma_liste = ma_liste->suivant;
+  }
+
+}
