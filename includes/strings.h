@@ -12,5 +12,7 @@ strings* str_remplir(strings* l, const char* tab[], unsigned int nb);
 int str_rechercher(strings* l, char* chaine);
 strings* str_supprimer(strings* l, char* chaine);
 void str_vider(strings** l);
+int str_size(strings* l);
+strings* fusion(strings* l1, strings* l2);
 
 #endif //STRINGS_H

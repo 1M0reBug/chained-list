@@ -34,12 +34,13 @@ void str_afficher(strings* l) {
   * @param entier: int un entier à ajouter à la fin de la strings
   * @return strings* la strings modifiée
   */
-strings* str_ajoute_fin(strings* l, const char* chaine) {
+strings* str_ajoute_fin(strings* l, char* chaine) {
   strings *nouvelElement = malloc(sizeof(strings));
   nouvelElement->valeur = chaine;
   nouvelElement->suivant = NULL;
 
   if(l == NULL){
+    l = nouvelElement;
     return nouvelElement;
   } else {
     strings* temp = l;
@@ -60,7 +61,7 @@ strings* str_ajoute_fin(strings* l, const char* chaine) {
   * @param entier: int l'entier à ajouter au début de la strings
   * @return strings* la strings modifiée
   */
-strings* str_ajoute_debut(strings* l, const char* chaine) {
+strings* str_ajoute_debut(strings* l, char* chaine) {
 
     strings* _l = malloc(sizeof(strings));
     _l->valeur = "";
@@ -188,4 +189,31 @@ void str_vider(strings** l) {
   }
 
   l = NULL;
+}
+
+int str_size(strings* l) {
+    strings* courant = l;
+    int i = 0;
+    while(courant) {
+        courant = courant->suivant;
+        i++;
+    }
+    return i;
+}
+
+strings* fusion(strings* l1, strings* l2) {
+
+    strings* c1 = l1;
+    strings* c2 = l2;
+    strings* l = NULL;
+    while(c1 || c2) {
+        if(!c2 || c1 && c2 && str_size(c1) < str_size(c2)) {
+            l=str_ajoute_fin(l, c1->valeur);
+            c1 = c1->suivant;
+        } else {
+            l=str_ajoute_fin(l, c2->valeur);
+            c2 = c2->suivant;
+        }
+    }
+    return l;
 }
