@@ -14,8 +14,73 @@ void test_lists();
 void test_strings();
 
 int main() {
-  test_lists();
-  test_strings();
+
+  int liste_triee = 0;
+  int choix_liste = 0;  // Liste L1 = 0 et L2 = 1
+
+  /*Initialisation des liste*/
+  strings* ma_liste = NULL;
+  strings* liste1 = NULL;
+  strings* liste2 = NULL;
+  strings* ma_liste_triee = NULL;
+
+  char* tab[5];
+
+  tab[0] = 1;
+  tab[1] = 2;
+  tab[2] ="ccc";
+  tab[3] ="ddd";
+  tab[4] ="eee";
+  str_remplir(ma_liste, tab, 5);
+
+  printf("La liste :\n");
+  str_afficher(ma_liste);
+  printf("---\n");
+
+  while(liste_triee == 0)
+  {
+    //Eclatement
+    while(ma_liste->suivant != NULL)
+    {
+      switch (choix_liste)
+      {
+        case 0:
+          liste1->valeur = ma_liste->valeur;
+          liste1->suivant = NULL;
+        break;
+
+        case 1:
+          liste2->valeur = ma_liste->valeur;
+          liste2->suivant = NULL;
+        break;
+
+        default :
+          printf("Erreur de choix de liste\n");
+      }
+
+      if(ma_liste->suivant->valeur <= ma_liste->valeur)
+      {
+        if(choix_liste == 0)
+          choix_liste = 1;
+        else if (choix_liste == 1)
+            choix_liste = 1;
+        else
+        printf("Erreur de choix de liste (2)\n");
+      }
+    }
+
+    //Fusion
+
+
+  }
+
+  printf("Voici votre liste triée :\n");
+  str_afficher(ma_liste);
+  printf("---\n");
+
+
+  //test_lists();
+  //test_strings();
   return 0;
 }
 
