@@ -1,6 +1,6 @@
 EXEC = chained-lists # [NOM DE L'EXE]
 CXX = gcc
-OPTION = -Wall -Wextra
+OPTION = -Wall -Wextra -g
 
 #Path
 PATH_INC = includes
@@ -23,7 +23,7 @@ debug : $(EXEC)
 	gdb ./$(EXEC)
 
 valgrind: $(EXEC)
-	valgrind ./$(EXEC)
+	valgrind ./$(EXEC) --leak-check=full
 
 $(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
 	$(CXX) $(OPTION) -o $@ -c $< -I$(PATH_INC)

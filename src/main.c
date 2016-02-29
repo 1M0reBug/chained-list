@@ -17,6 +17,7 @@ int main() {
 
   int liste_triee = 0;
   int choix_liste = 0;  // Liste L1 = 0 et L2 = 1
+  char*  courant = "";
 
   /*Initialisation des liste*/
   strings* ma_liste = NULL;
@@ -24,58 +25,61 @@ int main() {
   strings* liste2 = NULL;
   strings* ma_liste_triee = NULL;
 
-  char* tab[5];
+  const char* tab[5];
+  tab[0] = "bbb";
+  tab[1] = "aaa";
+  tab[2] = "eee";
+  tab[3] = "ccc";
+  tab[4] = "ddd";
 
-  tab[0] = 1;
-  tab[1] = 2;
-  tab[2] ="ccc";
-  tab[3] ="ddd";
-  tab[4] ="eee";
-  str_remplir(ma_liste, tab, 5);
+  ma_liste = str_remplir(ma_liste, tab, 5);
 
   printf("La liste :\n");
   str_afficher(ma_liste);
-  printf("---\n");
+  printf("---\n\n");
 
-  while(liste_triee == 0)
-  {
-    //Eclatement
-    while(ma_liste->suivant != NULL)
+    while(ma_liste)
     {
+      if(strcmp(ma_liste->valeur, courant) < 0)
+      {
+        /*switch de liste */
+        if(choix_liste == 0)
+          choix_liste = 1;
+        else if (choix_liste == 1)
+          choix_liste = 0;
+        else
+          printf("Erreur de choix de liste (2)\n");
+      }
       switch (choix_liste)
       {
         case 0:
-          liste1->valeur = ma_liste->valeur;
-          liste1->suivant = NULL;
-        break;
+          liste1 = str_ajoute_fin(liste1, ma_liste->valeur);
+          courant = ma_liste->valeur;
+          break;
 
         case 1:
-          liste2->valeur = ma_liste->valeur;
-          liste2->suivant = NULL;
-        break;
+          liste2 = str_ajoute_fin(liste2, ma_liste->valeur);
+          courant = ma_liste->valeur;
+          break;
 
         default :
           printf("Erreur de choix de liste\n");
       }
 
-      if(ma_liste->suivant->valeur <= ma_liste->valeur)
-      {
-        if(choix_liste == 0)
-          choix_liste = 1;
-        else if (choix_liste == 1)
-            choix_liste = 1;
-        else
-        printf("Erreur de choix de liste (2)\n");
-      }
+      ma_liste = ma_liste->suivant;
     }
+    printf("Liste 1 :\n");
+    str_afficher(liste1);
+    printf("---\n\n");
 
-    //Fusion
+    printf("Liste 2 :\n");
+    str_afficher(liste2);
+    printf("---\n\n");
 
 
-  }
-
+  ma_liste_triee = str_remplir(ma_liste_triee, tab, 5); //temporaire pour eviter les seg fault (a supprimer apres avoir fait la fusion)
   printf("Voici votre liste triée :\n");
-  str_afficher(ma_liste);
+  str_afficher(ma_liste_triee);
   printf("---\n");
 
 
@@ -92,7 +96,6 @@ void test_strings() {
     tab[2] = "ccc";
     tab[3] = "ddd";
     tab[4] = "eee";
-    tab[5] = "fff";
 
     printf("Remplir la liste :\n");
     ma_liste = str_remplir(ma_liste, tab, 5);

@@ -27,7 +27,7 @@ void str_afficher(strings* l) {
 }
 
 /**
-  * ajoute un élément à la fin de la strings
+  * ajoute un élément à la fin de la string
   * passée en paramètrue
   * @param l: strings* la liste à laquelle il faut
   *           ajouter un élément à la fin
