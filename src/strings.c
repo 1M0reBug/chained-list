@@ -54,6 +54,21 @@ strings* str_ajoute_fin(strings* l, char* chaine) {
   return l;
 }
 
+strings* str_ajoute_str_fin(strings* l, strings* e) {
+    e->suivant = NULL;
+    if(l == NULL) {
+        return e;
+    } else {
+        strings* _l = l;
+        while(_l->suivant){
+            _l = _l->suivant;
+        }
+        _l->suivant = e;
+        return l;
+    }
+    return l;
+}
+
 /**
   * ajoute un élément à la place de la tête de
   * la strings
@@ -107,7 +122,7 @@ strings* str_ajoute_position(strings* l, char* chaine, unsigned int position) {
   * @param nb: unsigned int la taille du tableau tab
   * @return strings* la strings remplie
   */
-strings* str_remplir(strings* l, const char* tab[], unsigned int nb) {
+strings* str_remplir(strings* l, char* tab[], unsigned int nb) {
 
     unsigned int i = 0;
     strings* l_copy = l;
@@ -185,10 +200,12 @@ void str_vider(strings** l) {
   while(tmp) {
     del = tmp;
     tmp = tmp->suivant;
+    del->suivant = NULL;
+    del->valeur = NULL;
     free(del);
   }
 
-  l = NULL;
+  *l = NULL;
 }
 
 int str_size(strings* l) {
@@ -201,29 +218,21 @@ int str_size(strings* l) {
     return i;
 }
 
-strings* fusion(strings* l1, strings* l2) {
+strings* fusion(strings* l, strings* l1, strings* l2) {
 
     strings* c1 = l1;
     strings* c2 = l2;
-    strings* l = NULL;
-    strings* tmp = NULL;
     while(c1 || c2) {
         if(!c2 || (c1 && c2 && strcmp(c1->valeur, c2->valeur) < 0)) {
-            // printf("toto\n");
-            l=str_ajoute_fin(l, c1->valeur);
-            tmp = c1;
+            l = str_ajoute_fin(l, c1->valeur);
             c1 = c1->suivant;
         } else {
-            // printf("tata\n");
-            l=str_ajoute_fin(l, c2->valeur);
-            tmp = c2;
+            l = str_ajoute_fin(l, c2->valeur);
             c2 = c2->suivant;
         }
-        tmp->suivant = NULL;
-        tmp->valeur = NULL;
-        free(tmp);
-        tmp = NULL;
     }
+    str_vider(&l1);
+    str_vider(&l2);
     return l;
 }
 
@@ -271,5 +280,4 @@ void eclatement(strings* ma_liste, strings** liste1, strings** liste2) {
 
     ma_liste = ma_liste->suivant;
   }
-
 }

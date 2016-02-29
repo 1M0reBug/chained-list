@@ -27,7 +27,7 @@ int main() {
 
 void test_strings() {
     strings* ma_liste = NULL;
-    const char* tab[5];
+    char* tab[5];
     tab[0] = "aaa";
     tab[1] = "bbb";
     tab[2] = "ccc";
@@ -126,7 +126,7 @@ void test_fusion() {
     s2 = str_remplir(s2, tab2, 3);
 
     strings* dst = NULL;
-    dst = fusion(s1, s2);
+    dst = fusion(dst, s1, s2);
 
     str_afficher(dst);
     printf("---\n");
@@ -137,15 +137,13 @@ void test_fusion() {
 }
 
 void test_eclatement() {
-    int liste_triee = 0;
-
     /*Initialisation des liste*/
     strings* ma_liste_triee = NULL;
     strings* ma_liste = NULL;
     strings* liste1 = NULL;
     strings* liste2 = NULL;
 
-    const char* tab[5];
+    char* tab[5];
     tab[0] = "aaa";
     tab[1] = "ddd";
     tab[2] = "ccc";
@@ -154,18 +152,17 @@ void test_eclatement() {
 
     ma_liste = str_remplir(ma_liste, tab, 5);
 
-    printf("La liste :\n");
+    printf("La liste initiale:\n");
     str_afficher(ma_liste);
-    printf("---\n\n");
+    printf("---\n");
     ma_liste_triee = ma_liste;
     while(!est_triee(ma_liste_triee)) {
         eclatement(ma_liste_triee, &liste1, &liste2);
-        // str_afficher(ma_liste_triee);
-        ma_liste_triee = fusion(liste1, liste2);
+        str_vider(&ma_liste_triee);
+        ma_liste_triee = fusion(ma_liste_triee, liste1, liste2);
         liste1 = liste2 = NULL;
         str_afficher(ma_liste_triee);
         printf("---\n");
-        // sleep(1);
     }
 
     printf("Voici votre liste triée :\n");
@@ -173,7 +170,6 @@ void test_eclatement() {
     printf("---\n");
 
     str_vider(&ma_liste_triee);
-    str_vider(&ma_liste);
     str_vider(&liste1);
     str_vider(&liste2);
 }

@@ -23,7 +23,7 @@ debug : $(EXEC)
 	gdb ./$(EXEC)
 
 valgrind: $(EXEC)
-	valgrind ./$(EXEC) --leak-check=full
+	valgrind --leak-check=full ./$(EXEC)
 
 $(PATH_OBJ)/%.o : $(PATH_SRC)/%.c
 	$(CXX) $(OPTION) -o $@ -c $< -I$(PATH_INC)
