@@ -12,9 +12,9 @@
 
 void test_lists();
 void test_strings();
+void test_fusion();
 
 int main() {
-
   int liste_triee = 0;
   int choix_liste = 0;  // Liste L1 = 0 et L2 = 1
   char*  courant = "";
@@ -171,4 +171,30 @@ void test_lists() {
     printf("\nVidange de la liste:\n");
     vider(&ma_liste);
     printf("---\n");
+}
+
+void test_fusion() {
+    strings* s1 = NULL;
+    strings* s2 = NULL;
+    char* tab1[2];
+    tab1[0] = "aaa";
+    tab1[1] = "ddd";
+
+    char* tab2[3];
+    tab2[0] = "ccc";
+    tab2[1] = "bbb";
+    tab2[2] = "eee";
+
+    s1 = str_remplir(s1, tab1, 2);
+    s2 = str_remplir(s2, tab2, 3);
+
+    strings* dst = NULL;
+    dst = fusion(s1, s2);
+
+    str_afficher(dst);
+    printf("---\n");
+
+    str_vider(&dst);
+    str_vider(&s1);
+    str_vider(&s2);
 }
