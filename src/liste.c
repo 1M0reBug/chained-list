@@ -20,7 +20,7 @@
 void afficher(liste* l) {
   liste *tmp = l;
 
-  while(tmp != NULL)
+  while(tmp)
   {
       printf("%d \n", tmp->valeur);
       tmp = tmp->suivant;
@@ -44,7 +44,7 @@ liste* ajoute_fin(liste* l, int entier) {
     return nouvelElement;
   } else {
     liste* temp = l;
-    while(temp->suivant != NULL)
+    while(temp->suivant)
     {
         temp = temp->suivant;
     }
@@ -86,7 +86,7 @@ liste* ajoute_position(liste* l, int entier, unsigned int position) {
     unsigned int i = 1;
     liste* courant = l;
 
-    for(i = 1; i < position-1 && courant->suivant != NULL; i++) {
+    for(i = 1; i < position-1 && courant->suivant; i++) {
         courant = courant->suivant;
     }
 
@@ -131,7 +131,7 @@ int rechercher(liste* l, int entier) {
 
     liste* courant = l;
     int j = 1;
-    while(courant != NULL) {
+    while(courant) {
         if(courant->valeur == entier) {
             return j;
         }
@@ -152,8 +152,13 @@ liste* supprimer(liste* l, int entier) {
     liste* courant;
     liste* precedent;
     courant = l;
-    while(courant->suivant != NULL) {
-        if((courant->suivant)->valeur == entier) {
+    while(courant->suivant) {
+        if(courant->valeur == entier) {
+            l = courant->suivant;
+            free(courant);
+            return l;
+
+        } else if((courant->suivant)->valeur == entier) {
             precedent = courant;
             courant = courant->suivant;
             precedent->suivant = courant->suivant;
@@ -173,10 +178,13 @@ liste* supprimer(liste* l, int entier) {
   */
 void vider(liste** l) {
   liste* tmp = *l;
+  liste* del;
 
-  while(tmp != NULL)
-  {
-    free(tmp);
+  while(tmp) {
+    del = tmp;
     tmp = tmp->suivant;
+    free(del);
   }
+
+  l = NULL;
 }
